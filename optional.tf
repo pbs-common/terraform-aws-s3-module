@@ -81,7 +81,7 @@ variable "lifecycle_rules" {
         key   = string
         value = string
       }))
-    }))
+    }), {})
     abort_incomplete_multipart_upload_days = optional(number)
     expiration = optional(object({
       date                         = optional(string)
