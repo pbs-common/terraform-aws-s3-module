@@ -11,6 +11,7 @@ module "source_bucket" {
   organization = var.organization
   environment  = var.environment
   product      = var.product
+  owner        = var.owner
   repo         = var.repo
 }
 
@@ -41,5 +42,6 @@ module "target_bucket" {
   organization = var.organization
   environment  = var.environment
   product      = var.product
+  owner        = var.owner
   repo         = var.repo
 }
