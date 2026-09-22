@@ -239,3 +239,25 @@ variable "inventory_config" {
     ])
   })
 }
+
+variable "logging_config" {
+  description = <<EOT
+(optional) Server access logging configuration. When null, no access logs are delivered.
+
+The target bucket must already permit delivery — either a bucket policy allowing
+`logging.s3.amazonaws.com`, or the legacy `LogDelivery` ACL grant. This module does not manage the
+target bucket, and `PutBucketLogging` fails if delivery is not permitted.
+
+```hcl
+logging_config = {
+  target_bucket = "my-log-bucket"
+  target_prefix = "my-app-prod-s3/"
+}
+```
+EOT
+  default     = null
+  type = object({
+    target_bucket = string
+    target_prefix = optional(string, "")
+  })
+}

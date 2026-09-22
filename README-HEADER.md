@@ -59,6 +59,23 @@ module "s3" {
 }
 ```
 
+### Server access logging
+
+`logging_config` delivers server access logs to another bucket. Omit it and no logs are delivered.
+
+```hcl
+logging_config = {
+  target_bucket = "my-log-bucket"
+  target_prefix = "my-app-prod-s3/"
+}
+```
+
+> :warning: The destination bucket must already permit delivery, and this module does not manage it — `PutBucketLogging` fails outright if delivery is not permitted. Grant it either with a bucket policy allowing `logging.s3.amazonaws.com`, or with the `log-delivery-write` canned ACL.
+>
+> Watch out for a `force_tls` policy on the destination: denying requests without `aws:SecureTransport` is a known way to block log delivery.
+
+See [the logging example](/examples/logging).
+
 ## Adding This Version of the Module
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
