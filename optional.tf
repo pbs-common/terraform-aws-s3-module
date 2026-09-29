@@ -16,6 +16,16 @@ variable "is_versioned" {
   type        = bool
 }
 
+variable "blocked_encryption_types" {
+  description = "(optional) Server-side encryption types the bucket rejects. Defaults to blocking SSE-C (customer-provided keys), which matches the default AWS applies to new buckets from April 2026 and forces objects onto the bucket's own AES256 encryption. Set to [] to permit SSE-C, or null to leave whatever is already set on the bucket untouched."
+  default     = ["SSE-C"]
+  type        = list(string)
+  validation {
+    condition     = var.blocked_encryption_types == null || alltrue([for t in coalesce(var.blocked_encryption_types, []) : contains(["SSE-C"], t)])
+    error_message = "The only encryption type that can be blocked is \"SSE-C\"."
+  }
+}
+
 variable "acl" {
   description = "ACL configuration for the bucket. If an ACL is not provided, the bucket will be created with ACLs disabled"
   default     = null
