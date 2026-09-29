@@ -50,7 +50,7 @@ resource "aws_iam_role_policy" "replication_policy" {
 }
 
 module "s3_policy" {
-  source = "github.com/pbs/terraform-aws-s3-bucket-policy-module?ref=2.0.0"
+  source = "github.com/pbs-sdo/terraform-aws-s3-bucket-policy-module?ref=30566a7d8be3e870d99e5439be2d44001d55692e"
   count  = var.create_bucket_policy ? 1 : 0
 
   name = aws_s3_bucket.bucket.id
