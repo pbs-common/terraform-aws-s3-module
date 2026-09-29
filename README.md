@@ -7,7 +7,7 @@
 Use this URL for the source of the module. See the usage examples below for more details.
 
 ```hcl
-github.com/pbs/terraform-aws-s3-module?ref=5.0.3
+github.com/pbs/terraform-aws-s3-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -28,7 +28,7 @@ Integrate this module like so:
 
 ```hcl
 module "s3" {
-  source = "github.com/pbs/terraform-aws-s3-module?ref=5.0.3"
+  source = "github.com/pbs/terraform-aws-s3-module?ref=x.y.z"
 
   # Tagging Parameters
   organization = var.organization
@@ -80,7 +80,7 @@ See [the logging example](/examples/logging).
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`5.0.3`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -97,13 +97,13 @@ Below is automatically generated documentation on this Terraform module using [t
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.13.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.40.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.62.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.66.0 |
 
 ## Modules
 
@@ -145,6 +145,7 @@ Below is automatically generated documentation on this Terraform module using [t
 | <a name="input_allow_anonymous_vpce_access"></a> [allow\_anonymous\_vpce\_access](#input\_allow\_anonymous\_vpce\_access) | Create bucket policy that allows anonymous VPCE access. | `bool` | `false` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `true` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `true` | no |
+| <a name="input_blocked_encryption_types"></a> [blocked\_encryption\_types](#input\_blocked\_encryption\_types) | (optional) Server-side encryption types the bucket rejects. Defaults to blocking SSE-C (customer-provided keys), which matches the default AWS applies to new buckets from April 2026 and forces objects onto the bucket's own AES256 encryption. Set to [] to permit SSE-C, or null to leave whatever is already set on the bucket untouched. | `list(string)` | <pre>[<br/>  "SSE-C"<br/>]</pre> | no |
 | <a name="input_bucket_policy"></a> [bucket\_policy](#input\_bucket\_policy) | Policy to apply to the bucket. If null, one will be guessed based on other variables. | `string` | `null` | no |
 | <a name="input_cloudfront_oac_access_statements"></a> [cloudfront\_oac\_access\_statements](#input\_cloudfront\_oac\_access\_statements) | List of objects that define the CloudFront origin access identity access statement. Each object must have a `cloudfront_arn` and `path` key. | <pre>list(object({<br/>    cloudfront_arn = string<br/>    path           = optional(string, "*")<br/>  }))</pre> | `[]` | no |
 | <a name="input_cors_rules"></a> [cors\_rules](#input\_cors\_rules) | CORS Rules | <pre>set(object({<br/>    allowed_headers = list(string),<br/>    allowed_methods = list(string),<br/>    allowed_origins = list(string),<br/>    expose_headers  = list(string),<br/>    max_age_seconds = number<br/>  }))</pre> | `[]` | no |
